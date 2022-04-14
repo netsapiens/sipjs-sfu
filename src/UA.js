@@ -541,7 +541,11 @@ module.exports = function(SIP, environment) {
          * They are processed as if they had been received outside the dialog.
          */
         if (method === SIP.C.OPTIONS) {
-
+            var via = request.getHeader('via');
+            via = via.replace('0.0.0.0', request.info.address);
+            request.setHeader('via', via);
+            request.reply_sl(410);
+            
             if (this.configuration.optionsHandler == null){
                 this.resolveOptions(200, request)
             } else {
