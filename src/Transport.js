@@ -81,9 +81,10 @@ module.exports = function(SIP, WebSocket) {
                 transport.ua.onTransportConnected(transport);
             });
 
-            this.server.on('message', function(msg) {
+            this.server.on('message', function(msg, info) {
                 transport.onMessage({
-                    data: msg
+                    data: msg,
+                    info: info
                 });
             });
 
@@ -99,7 +100,8 @@ module.exports = function(SIP, WebSocket) {
          */
         onMessage: function(e) {
             var message, transaction,
-                data = e.data;
+                data = e.data,
+                info = e.info;
 
             if (typeof data !== 'string') {
 
@@ -137,6 +139,7 @@ module.exports = function(SIP, WebSocket) {
             if (SIP.sanityCheck(message, this.ua, this)) {
                 if (message instanceof SIP.IncomingRequest) {
                     message.transport = this;
+                    message.info = info;
                     this.ua.receiveRequest(message);
                 } else if (message instanceof SIP.IncomingResponse) {
                     /* Unike stated in 18.1.2, if a response does not match
