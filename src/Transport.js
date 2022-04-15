@@ -102,7 +102,6 @@ module.exports = function(SIP, WebSocket) {
             var message, transaction,
                 data = e.data,
                 info = e.info;
-
             if (typeof data !== 'string') {
 
                 try {
