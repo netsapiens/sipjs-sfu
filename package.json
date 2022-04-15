@@ -5,7 +5,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cwysong85/sipjs-udp"
+    "url": "https://github.com/netsapiens/sipjs-sfu"
   },
   "dependencies": {
     "promiscuous": "^0.6.0"
@@ -36,11 +36,11 @@
   ],
   "license": "MIT",
   "main": "src/index.js",
-  "name": "sipjs-udp",
+  "name": "sipjs-sfu",
   "scripts": {
     "prepublish": "cd src/Grammar && mkdir -p dist && pegjs --extra-options-file peg.json src/Grammar.pegjs dist/Grammar.js",
     "test": "grunt travis --verbose"
   },
-  "title": "sipjs-udp",
+  "title": "sipjs-sfu",
   "version": "0.0.15"
 }
