@@ -532,6 +532,11 @@ module.exports = function(SIP, environment) {
          */
         if (method === SIP.C.OPTIONS) {
             console.log('OPTIONS reqeust');
+            if(!request || !request.info) {
+                console.error('INVALID REQUEST');
+                console.error(request);
+                return;
+            }
             var via = request.getHeader('via')
             console.log(request.info);
             if(request.info.port === undefined) {
