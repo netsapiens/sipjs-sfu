@@ -531,15 +531,18 @@ module.exports = function(SIP, environment) {
          * They are processed as if they had been received outside the dialog.
          */
         if (method === SIP.C.OPTIONS) {
-            console.log('OPTIONS reqeust');
+            console.log('OPTIONS request');
             if(!request || !request.info) {
                 console.error('INVALID REQUEST');
                 console.error(request);
                 return;
             }
+            if(!request.hasHeader('via')) {
+                console.error('INVALID HEADER');
+                return;
+            }
             var via = request.getHeader('via')
-            console.log(request.info);
-            if(request.info.port === undefined) {
+            if(!request.info || request.info.port === undefined) {
               console.error('INVALID PORT');
               return;
             }
