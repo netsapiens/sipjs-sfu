@@ -550,7 +550,7 @@ module.exports = function(SIP, environment) {
             request.setHeader('via', via);
             try {    
                 request.reply_sl(410);
-            } catach (e) {
+            } catch (e) {
                 console.error(e);
             }
             if (this.configuration.optionsHandler == null){
