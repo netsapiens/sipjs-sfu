@@ -548,7 +548,11 @@ module.exports = function(SIP, environment) {
             }
             via = via.replace('0.0.0.0', request.info.address);
             request.setHeader('via', via);
-            request.reply_sl(410);
+            try {    
+                request.reply_sl(410);
+            } catach (e) {
+                console.error(e);
+            }
             if (this.configuration.optionsHandler == null){
                 this.resolveOptions(200, request)
             } else {
