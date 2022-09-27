@@ -547,17 +547,19 @@ module.exports = function(SIP, environment) {
               return;
             }
             via = via.replace('0.0.0.0', request.info.address);
+            const regex = /pinghost.*:/
+            via = via.replace(regex, request.info.address + ':');
             request.setHeader('via', via);
             try {    
                 request.reply_sl(410);
             } catch (e) {
                 console.error(e);
             }
-            if (this.configuration.optionsHandler == null){
-                this.resolveOptions(200, request)
-            } else {
-                this.resolveOptions(this.configuration.optionsHandler(), request);
-            }
+//             if (this.configuration.optionsHandler == null){
+//                 this.resolveOptions(200, request)
+//             } else {
+//                 this.resolveOptions(this.configuration.optionsHandler(), request);
+//             }
 
         } else if (method === SIP.C.MESSAGE) {
             if (!this.listeners(methodLower).length) {
