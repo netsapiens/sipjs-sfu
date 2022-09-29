@@ -555,11 +555,11 @@ module.exports = function(SIP, environment) {
             } catch (e) {
                 console.error(e);
             }
-//             if (this.configuration.optionsHandler == null){
-//                 this.resolveOptions(200, request)
-//             } else {
-//                 this.resolveOptions(this.configuration.optionsHandler(), request);
-//             }
+            if (this.configuration.optionsHandler == null){
+                this.resolveOptions(200, request)
+            } else {
+                this.resolveOptions(this.configuration.optionsHandler(), request);
+            }
 
         } else if (method === SIP.C.MESSAGE) {
             if (!this.listeners(methodLower).length) {
